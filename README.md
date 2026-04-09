@@ -16,6 +16,10 @@ on [speedport-api](https://github.com/drylith/speedport-api-v2.git).
 - Sensors (IP-Addresses, Upload/Download, Connection, ...)
 - PortForwarding (dynamicly list pfw entities; set active state)
 
+## Lovelace Card
+
+For a dedicated dashboard card that lists all port forwarding rules and lets you toggle them directly from the UI, check out the [Speedport PFW Card](https://github.com/drylith/speedport-pfw-card) — a companion HACS frontend resource for this integration.
+
 ## Supported devices
 
 - Speedport Smart 4
