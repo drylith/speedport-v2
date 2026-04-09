@@ -22,6 +22,7 @@ STEP_USER_DATA_SCHEMA = vol.Schema(
         vol.Required("host", default="speedport.ip"): str,
         vol.Required("password"): str,
         vol.Optional("https", default=False): bool,
+        vol.Optional("add_ip_devices", default=True): bool,
     }
 )
 

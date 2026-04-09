@@ -13,7 +13,8 @@
                 "data": {
                     "host": "Host",
                     "password": "Password",
-                    "https": "Use https connection"
+                    "https": "Use https connection",
+                    "add_ip_devices": "Add IP devices"
                 }
             }
         }
