@@ -134,7 +134,7 @@ class SpeedportPortForwardingSwitch(SwitchEntity, SpeedportEntity):
         super().__init__(hass, speedport)
         self._port_forwarding_id: str = port_forwarding.id
         self._attr_icon = "mdi:transit-connection-variant"
-        self._attr_name = f"Port Forwarding {port_forwarding.name}"
+        self._attr_name = f"pfw_{port_forwarding.name}"
         self._attr_unique_id = f"port_forwarding_{port_forwarding.id}"
 
     @property
