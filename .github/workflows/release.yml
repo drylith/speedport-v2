@@ -1,25 +1,36 @@
-name: Release
+name: Release on main push
 
 on:
-  release:
-    types: [published]
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
 
 jobs:
-  release-zip:
+  release:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout
+        uses: actions/checkout@v4
 
-      - name: ZIP Component Dir
+      - name: Version aus manifest.json lesen
+        id: version
         run: |
-          cd ${{ github.workspace }}/custom_components/speedport
-          zip -r speedport.zip ./
+          VERSION=$(jq -r '.version' custom_components/speedport/manifest.json)
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
 
-      - name: Upload zip to release
-        uses: svenstaro/upload-release-action@v2
+      - name: speedport.zip erstellen
+        run: |
+          cd custom_components/speedport
+          zip -r ../../speedport.zip ./*
+
+      - name: Release erstellen und ZIP hochladen
+        uses: softprops/action-gh-release@v2
         with:
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: ${{ github.workspace }}/custom_components/speedport/speedport.zip
-          asset_name: speedport.zip
-          tag: ${{ github.ref }}
-          overwrite: true
+          tag_name: v${{ steps.version.outputs.version }}
+          name: v${{ steps.version.outputs.version }}
+          prerelease: false
+          files: speedport.zip
