@@ -14,6 +14,7 @@ on [speedport-api](https://github.com/drylith/speedport-api-v2.git).
 - Turn on/off wifi (guest/office/normal)
 - Reconnect, reboot, wps on
 - Sensors (IP-Addresses, Upload/Download, Connection, ...)
+- PortForwarding (dynamicly list pfw entities; set active state)
 
 ## Supported devices
 
