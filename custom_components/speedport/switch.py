@@ -50,7 +50,7 @@ async def async_setup_entry(
             registry = er.async_get(hass)
             for pf_id in removed_ids:
                 entity_id = registry.async_get_entity_id(
-                    "switch", DOMAIN, f"port_forwarding_{pf_id}"
+                    "switch", DOMAIN, f"pfw_{pf_id}"
                 )
                 if entity_id:
                     registry.async_remove(entity_id)
@@ -133,9 +133,9 @@ class SpeedportPortForwardingSwitch(SwitchEntity, SpeedportEntity):
     def __init__(self, hass: HomeAssistant, speedport: Speedport, port_forwarding: PortForwarding) -> None:
         super().__init__(hass, speedport)
         self._port_forwarding_id: str = port_forwarding.id
-        self._attr_icon = "mdi:transit-connection-variant"
+        self._attr_icon = "mdi:wall"
         self._attr_name = f"pfw_{port_forwarding.name}"
-        self._attr_unique_id = f"port_forwarding_{port_forwarding.id}"
+        self._attr_unique_id = f"pfw_{port_forwarding.id}"
 
     @property
     def is_on(self) -> bool | None:
