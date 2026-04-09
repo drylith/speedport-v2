@@ -147,7 +147,9 @@ class SpeedportPortForwardingSwitch(SwitchEntity, SpeedportEntity):
     async def async_turn_on(self, **kwargs: Any) -> None:
         """Turn on switch."""
         await self._speedport.set_port_forwarding(self._port_forwarding_id, True)
+        await self._coordinator.async_request_refresh()
 
     async def async_turn_off(self, **kwargs: Any) -> None:
         """Turn off switch."""
         await self._speedport.set_port_forwarding(self._port_forwarding_id, False)
+        await self._coordinator.async_request_refresh()
