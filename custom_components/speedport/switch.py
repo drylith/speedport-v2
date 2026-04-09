@@ -21,13 +21,20 @@ async def async_setup_entry(
     """Set up entry."""
 
     speedport: Speedport = hass.data[DOMAIN][entry.entry_id]
-    async_add_entities(
-        [
-            SpeedportWifiSwitch(hass, speedport),
-            SpeedportGuestWifiSwitch(hass, speedport),
-            SpeedportOfficeWifiSwitch(hass, speedport),
-        ]
-    )
+    entities: list = [
+        SpeedportWifiSwitch(hass, speedport),
+        SpeedportGuestWifiSwitch(hass, speedport),
+        SpeedportOfficeWifiSwitch(hass, speedport),
+    ]
+
+    try:
+        port_forwardings = await speedport.port_forwardings
+        for pf in port_forwardings:
+            entities.append(SpeedportPortForwardingSwitch(hass, speedport, pf))
+    except Exception:
+        _LOGGER.warning("Failed to fetch port forwardings", exc_info=True)
+
+    async_add_entities(entities)
 
 
 class SpeedportWifiSwitch(SwitchEntity, SpeedportEntity):
@@ -97,3 +104,27 @@ class SpeedportOfficeWifiSwitch(SwitchEntity, SpeedportEntity):
     async def async_turn_off(self, **kwargs: Any) -> None:
         """Turn off switch."""
         await self._speedport.wifi_office_off()
+
+
+class SpeedportPortForwardingSwitch(SwitchEntity, SpeedportEntity):
+    def __init__(self, hass: HomeAssistant, speedport: Speedport, port_forwarding) -> None:
+        super().__init__(hass, speedport)
+        self._port_forwarding_id: str = port_forwarding.id
+        self._attr_icon = "mdi:transit-connection-variant"
+        self._attr_name = f"Port Forwarding {port_forwarding.name}"
+        self._attr_unique_id = f"port_forwarding_{port_forwarding.id}"
+
+    @property
+    def is_on(self) -> bool | None:
+        for pf in self._coordinator.port_forwardings:
+            if pf.id == self._port_forwarding_id:
+                return pf.active
+        return None
+
+    async def async_turn_on(self, **kwargs: Any) -> None:
+        """Turn on switch."""
+        await self._speedport.set_port_forwarding(self._port_forwarding_id, True)
+
+    async def async_turn_off(self, **kwargs: Any) -> None:
+        """Turn off switch."""
+        await self._speedport.set_port_forwarding(self._port_forwarding_id, False)
