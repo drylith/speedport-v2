@@ -1,0 +1,36 @@
+name: Pre-Release on dev push
+
+on:
+  push:
+    branches:
+      - dev
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Version aus manifest.json lesen
+        id: version
+        run: |
+          VERSION=$(jq -r '.version' custom_components/speedport/manifest.json)
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+
+      - name: speedport.zip erstellen
+        run: |
+          cd custom_components/speedport
+          zip -r ../../speedport.zip ./*
+
+      - name: Pre-Release erstellen und ZIP hochladen
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: v${{ steps.version.outputs.version }}
+          name: v${{ steps.version.outputs.version }}
+          prerelease: true
+          files: speedport.zip
