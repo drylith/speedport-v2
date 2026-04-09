@@ -23,7 +23,8 @@
         "step": {
             "init": {
                 "data": {
-                    "pause_time": "Pause for minutes"
+                    "pause_time": "Pause for minutes",
+                    "polling_rate": "Polling rate in seconds"
                 },
                 "title": "Settings",
                 "description": "Time to stop updating sensors that require authorization when the user logs in to the web interface. (User gets logged out after this time)"

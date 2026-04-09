@@ -110,7 +110,11 @@ class OptionsFlowHandler(config_entries.OptionsFlow):
                     vol.Required(
                         "pause_time",
                         default=self.config_entry.options.get("pause_time", 5),
-                    ): int
+                    ): int,
+                    vol.Required(
+                        "polling_rate",
+                        default=self.config_entry.options.get("polling_rate", 30),
+                    ): int,
                 }
             ),
         )

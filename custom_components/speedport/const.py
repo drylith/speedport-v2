@@ -1,4 +1,4 @@
 """Constants for the Speedport integration."""
 
 DOMAIN = "speedport"
-UPDATE_INTERVAL = 5
+UPDATE_INTERVAL = 30

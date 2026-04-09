@@ -23,7 +23,8 @@
         "step": {
             "init": {
                 "data": {
-                    "pause_time": "Pause in Minuten"
+                    "pause_time": "Pause in Minuten",
+                    "polling_rate": "Abfrageintervall in Sekunden"
                 },
                 "title": "Einstellungen",
                 "description": "Zeit in der das Updaten der Sensoren pausiert wird wenn sich ein Nutzer im Speedport Web-UI einloggt (Nutzer wird nach dieser Zeit ausgeloggt)"

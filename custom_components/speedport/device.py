@@ -26,11 +26,20 @@ class SpeedportCoordinator(DataUpdateCoordinator[None]):
             update_interval=timedelta(seconds=UPDATE_INTERVAL),
         )
         self._speedport: Speedport = device
+        self._port_forwardings: list = []
+
+    @property
+    def port_forwardings(self) -> list:
+        return self._port_forwardings
 
     async def _async_update_data(self) -> None:
         await asyncio.gather(
             *[self._speedport.update_status(), self._speedport.update_ip_data()]
         )
+        try:
+            self._port_forwardings = await self._speedport.port_forwardings
+        except Exception:
+            _LOGGER.debug("Failed to update port forwardings", exc_info=True)
 
 
 class SpeedportEntity(CoordinatorEntity[SpeedportCoordinator]):
