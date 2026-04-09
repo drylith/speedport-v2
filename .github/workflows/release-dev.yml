@@ -25,11 +25,13 @@ jobs:
           echo "version=$VERSION" >> $GITHUB_OUTPUT
 
       - name: speedport.zip erstellen
+        if: endsWith(steps.version.outputs.version, '-dev')
         run: |
           cd custom_components/speedport
           zip -r ../../speedport.zip ./*
 
       - name: Pre-Release erstellen und ZIP hochladen
+        if: endsWith(steps.version.outputs.version, '-dev')
         uses: softprops/action-gh-release@v2
         with:
           tag_name: v${{ steps.version.outputs.version }}
