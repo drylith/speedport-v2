@@ -1,9 +1,9 @@
-name: Release on main push
+name: Pre-Release on dev push
 
 on:
   push:
     branches:
-      - main
+      - dev
 
 permissions:
   contents: write
@@ -27,10 +27,10 @@ jobs:
           cd custom_components/speedport
           zip -r ../../speedport.zip ./*
 
-      - name: Release erstellen und ZIP hochladen
+      - name: Pre-Release erstellen und ZIP hochladen
         uses: softprops/action-gh-release@v2
         with:
           tag_name: v${{ steps.version.outputs.version }}
           name: v${{ steps.version.outputs.version }}
-          prerelease: false
+          prerelease: true
           files: speedport.zip

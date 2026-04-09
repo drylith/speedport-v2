@@ -1,11 +1,12 @@
 # Speedport Integration for Home Assistant
 
 [![hacs_badge](https://img.shields.io/badge/hacs-Default-41BDF5.svg)](https://hacs.xyz)
-[![GitHub](https://img.shields.io/github/license/Andre0512/speedport?color=red)](https://github.com/Andre0512/speedport/blob/main/LICENSE)
-[![GitHub release (latest by date)](https://img.shields.io/github/v/release/drylith/speedport?color=green)](https://github.com/drylith/speedport/releases/latest)
+[![GitHub](https://img.shields.io/github/license/drylith/speedport-v2?color=red)](https://github.com/drylith/speedport-v2/blob/main/LICENSE)
+[![GitHub release](https://img.shields.io/github/v/release/drylith/speedport-v2?color=green&label=release)](https://github.com/drylith/speedport-v2/releases/latest)
+[![GitHub pre-release](https://img.shields.io/github/v/release/drylith/speedport-v2?include_prereleases&color=orange&label=pre-release)](https://github.com/drylith/speedport-v2/releases)
 
 Telekom Speedport Integration for Home Assistant based
-on [speedport-api](https://github.com/drylith/speedport-api.git).
+on [speedport-api](https://github.com/drylith/speedport-api-v2.git).
 
 ## Features
 
