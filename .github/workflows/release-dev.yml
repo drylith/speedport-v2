@@ -1,9 +1,9 @@
-name: Release on main push
+name: Pre-Release on dev push
 
 on:
   push:
     branches:
-      - main
+      - dev
 
 permissions:
   contents: write
@@ -16,7 +16,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          ref: main
+          ref: dev
 
       - name: Version aus manifest.json lesen
         id: version
@@ -25,14 +25,16 @@ jobs:
           echo "version=$VERSION" >> $GITHUB_OUTPUT
 
       - name: speedport.zip erstellen
+        if: endsWith(steps.version.outputs.version, '-dev')
         run: |
           cd custom_components/speedport
           zip -r ../../speedport.zip ./*
 
-      - name: Release erstellen und ZIP hochladen
+      - name: Pre-Release erstellen und ZIP hochladen
+        if: endsWith(steps.version.outputs.version, '-dev')
         uses: softprops/action-gh-release@v2
         with:
           tag_name: v${{ steps.version.outputs.version }}
           name: v${{ steps.version.outputs.version }}
-          prerelease: false
+          prerelease: true
           files: speedport.zip

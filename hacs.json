@@ -1,7 +1,7 @@
 {
-    "name": "Speedport",
-    "render_readme": true,
-    "zip_release": true,
-    "filename": "speedport.zip",
-    "country": ["DE"]
+  "name": "Speedport-v2",
+  "render_readme": true,
+  "zip_release": true,
+  "filename": "speedport.zip",
+  "country": ["DE"]
 }

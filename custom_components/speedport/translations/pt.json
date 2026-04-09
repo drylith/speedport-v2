@@ -13,7 +13,8 @@
                 "data": {
                     "host": "Host",
                     "password": "Senha",
-                    "https": "Use uma ligação https"
+                    "https": "Use uma ligação https",
+                    "add_ip_devices": "Adicionar dispositivos IP"
                 }
             }
         }
@@ -22,7 +23,8 @@
         "step": {
             "init": {
                 "data": {
-                    "pause_time": "Pausa em minutos"
+                    "pause_time": "Pausa em minutos",
+                    "polling_rate": "Taxa de atualização em segundos"
                 },
                 "title": "Configurações",
                 "description": "Tempo para os sesores pararem precisa de autozição aos logs de utilizaor na interface web. (O utilizador é logado após este tempo)"
